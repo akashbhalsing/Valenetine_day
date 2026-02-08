@@ -22,13 +22,13 @@ body {
 .heart {
   position: fixed;
   bottom: -20px;
-  color: rgba(255,255,255,0.85);
   animation: floatUp 6s linear infinite;
+  z-index: 1;
 }
 
 @keyframes floatUp {
   from { transform: translateY(0) scale(1); opacity: 1; }
-  to   { transform: translateY(-110vh) scale(1.6); opacity: 0; }
+  to   { transform: translateY(-120vh) scale(1.5); opacity: 0; }
 }
 
 /* CARD */
@@ -57,9 +57,10 @@ p {
 
 /* NAMES */
 .names {
-  font-size: 30px;
+  font-size: 32px;
   font-weight: bold;
   margin-bottom: 15px;
+  text-shadow: 0 0 12px rgba(255,255,255,0.6);
 }
 .names span {
   color: #ffd1dc;
@@ -116,7 +117,7 @@ button {
 
 <body>
 
-<!-- MUSIC -->
+<!-- AUDIO -->
 <audio id="music" loop>
   <source src="gehra-hua.mp3" type="audio/mpeg">
 </audio>
@@ -148,8 +149,8 @@ button {
     </div>
 
     <div class="photos">
-      <img src="akash.jpg" alt="Akash">
-      <img src="kalyani.jpg" alt="Kalyani">
+      <img src="akash.jpeg" alt="Akash">
+      <img src="kalyani.jpeg" alt="Kalyani">
     </div>
 
     <h1>I Love You 💖</h1>
@@ -157,9 +158,9 @@ button {
     <p>
       Kalyani,<br>
       you are my calm, my chaos,<br>
-      and my forever.<br><br>
-      I promise to choose you,<br>
-      today and always 💍
+      my forever and always.<br><br>
+      I promise to choose you<br>
+      in every lifetime 💍
     </p>
   </div>
 
@@ -183,7 +184,7 @@ noBtn.addEventListener("touchstart", e => {
   moveNo();
 });
 
-/* PAGE TRANSITION */
+/* PAGE CHANGE */
 function goNext() {
   document.getElementById("page1").classList.remove("active");
   document.getElementById("page2").classList.add("active");
@@ -198,10 +199,10 @@ function startHearts() {
     heart.className = "heart";
     heart.innerHTML = "❤️";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 22 + 16 + "px";
+    heart.style.fontSize = Math.random() * 20 + 16 + "px";
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 6000);
-  }, 300);
+  }, 400);
 }
 </script>
 
