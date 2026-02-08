@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Forever ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  overflow: hidden;
+}
+
+.card {
+  background: rgba(0,0,0,0.25);
+  padding: 25px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.buttons {
+  margin-top: 25px;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+#yesBtn {
+  background: white;
+  color: #ff4f81;
+}
+
+#noBtn {
+  background: #ff4f81;
+  color: white;
+  position: absolute;
+  left: 50%;
+  top: 85%;
+  transform: translate(-50%, -50%);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <h1>My Love ❤️</h1>
+  <p>
+    From the moment you came into my life,<br>
+    everything changed for the better.<br><br>
+    You are my today, my tomorrow,<br>
+    and my forever.
+  </p>
+
+  <h2>Will you be mine forever? 💍</h2>
+
+  <div class="buttons">
+    <button id="yesBtn" onclick="yes()">YES ❤️</button>
+  </div>
+
+  <button id="noBtn">NO 💔</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const card = document.getElementById("card");
+
+function moveNoButton() {
+  const cardRect = card.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
+
+  const maxX = cardRect.width - btnRect.width - 20;
+  const maxY = cardRect.height - btnRect.height - 20;
+
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+}
+
+// Desktop
+noBtn.addEventListener("mouseover", moveNoButton);
+
+// Mobile
+noBtn.addEventListener("touchstart", function(e) {
+  e.preventDefault();
+  moveNoButton();
+});
+
+function yes() {
+  alert("I knew it 😍 I love you forever ❤️💍");
+}
+</script>
+
+</body>
+</html>
