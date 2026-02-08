@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Forever ❤️</title>
+<title>Akash ❤️ Kalyani</title>
 
 <style>
 body {
@@ -15,35 +15,65 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  text-align: center;
   overflow: hidden;
 }
 
-.card {
-  background: rgba(0,0,0,0.25);
-  padding: 25px;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 420px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  position: relative;
+/* HEARTS */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  color: rgba(255,255,255,0.8);
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
 }
 
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+}
+
+/* CARD */
+.card {
+  background: rgba(0,0,0,0.25);
+  padding: 30px;
+  border-radius: 25px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* PAGES */
+.page { display: none; }
+.page.active { display: block; }
+
 h1 {
-  font-size: 26px;
+  font-size: 28px;
+}
+.names {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.names span {
+  color: #ffd1dc;
 }
 
 p {
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
+/* BUTTONS */
 .buttons {
-  margin-top: 25px;
+  margin-top: 30px;
+  position: relative;
+  height: 120px;
 }
 
 button {
-  padding: 12px 25px;
+  padding: 14px 30px;
   font-size: 18px;
   border: none;
   border-radius: 30px;
@@ -53,68 +83,103 @@ button {
 #yesBtn {
   background: white;
   color: #ff4f81;
+  z-index: 2;
+  position: relative;
 }
 
 #noBtn {
   background: #ff4f81;
   color: white;
   position: absolute;
-  left: 50%;
-  top: 85%;
-  transform: translate(-50%, -50%);
+  left: 10%;
+  top: 60px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
-  <h1>My Love ❤️</h1>
-  <p>
-    From the moment you came into my life,<br>
-    everything changed for the better.<br><br>
-    You are my today, my tomorrow,<br>
-    and my forever.
-  </p>
+<!-- AUDIO -->
+<audio id="music" loop>
+  <source src="gehra-hua.mp3" type="audio/mpeg">
+</audio>
 
-  <h2>Will you be mine forever? 💍</h2>
+<div class="card">
 
-  <div class="buttons">
-    <button id="yesBtn" onclick="yes()">YES ❤️</button>
+  <!-- PAGE 1 -->
+  <div class="page active" id="page1">
+    <h1>My Love ❤️</h1>
+    <p>
+      From the moment you came into my life,<br>
+      everything changed for the better.<br><br>
+      You are my today, my tomorrow,<br>
+      and my forever.
+    </p>
+
+    <h2>Will you be mine forever? 💍</h2>
+
+    <div class="buttons">
+      <button id="yesBtn" onclick="goNext()">YES ❤️</button>
+      <button id="noBtn">NO 💔</button>
+    </div>
   </div>
 
-  <button id="noBtn">NO 💔</button>
+  <!-- PAGE 2 -->
+  <div class="page" id="page2">
+    <div class="names">
+      <span>Akash</span> ❤️ <span>Kalyani</span>
+    </div>
+
+    <h1>I Love You 💖</h1>
+
+    <p>
+      Kalyani,<br>
+      you are my calm, my chaos,<br>
+      my forever and always.<br><br>
+      I promise to choose you<br>
+      in every lifetime 💍
+    </p>
+  </div>
+
 </div>
 
 <script>
+/* NO BUTTON ESCAPE */
 const noBtn = document.getElementById("noBtn");
-const card = document.getElementById("card");
+const box = document.querySelector(".buttons");
 
-function moveNoButton() {
-  const cardRect = card.getBoundingClientRect();
-  const btnRect = noBtn.getBoundingClientRect();
-
-  const maxX = cardRect.width - btnRect.width - 20;
-  const maxY = cardRect.height - btnRect.height - 20;
-
-  const randomX = Math.random() * maxX;
-  const randomY = Math.random() * maxY;
-
-  noBtn.style.left = randomX + "px";
-  noBtn.style.top = randomY + "px";
+function moveNo() {
+  const x = Math.random() * (box.clientWidth - noBtn.offsetWidth);
+  const y = Math.random() * (box.clientHeight - noBtn.offsetHeight);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 }
 
-// Desktop
-noBtn.addEventListener("mouseover", moveNoButton);
-
-// Mobile
-noBtn.addEventListener("touchstart", function(e) {
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", e => {
   e.preventDefault();
-  moveNoButton();
+  moveNo();
 });
 
-function yes() {
-  alert("I knew it 😍 I love you forever ❤️💍");
+/* PAGE CHANGE */
+function goNext() {
+  document.getElementById("page1").classList.remove("active");
+  document.getElementById("page2").classList.add("active");
+  document.getElementById("music").play();
+  startHearts();
+}
+
+/* HEART GENERATOR */
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 300);
 }
 </script>
 
